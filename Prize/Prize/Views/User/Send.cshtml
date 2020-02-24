@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewData["Title"] = "Send";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form  >
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <button   class="btn btn-primary sendMes">Send</button>
+</form>
+
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+        
+        $('.sendMes').click(function () {
+            var userId = $("#exampleInputEmail1").val();
+            $.ajax({
+                type: "Post",
+                url: "/User/SendMesssage",
+                data: { usr: userId },
+                success: function (response) {
+                    if (response.status === "success") {
+                        Toast.fire({
+                            type: response.status,
+                            title: response.message
+                        })
+                        setInterval(function () {
+                            window.location.href = response.url;
+                        }, 1000);
+                    }
+                    else {
+                        Toast.fire({
+                            type: 'error',
+                            title: response.message
+                        })
+                    }
+                }
+
+            });
+        })
+
+
+
+    </script>
+}
+

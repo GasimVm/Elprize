@@ -1,0 +1,10 @@
+﻿
+table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > td:first-child:before,
+table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > th:first-child:before {
+    top: 22px;
+}
+.pagination .page-item.active .page-link {
+    background-color: #0b8071;
+    border-color: #0b8071;
+    color: #ffffff;
+}

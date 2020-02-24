@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>El-Prize</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/dashboard/authenticate/assets/images/logo-sm_1.png">
+    <!-- App css -->
+    <link href="~/dashboard/template/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/dashboard/template/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="~/dashboard/template/assets/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/dashboard/template/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/lib/DataTables/datatables.min.css" rel="stylesheet" />
+    <link href="~/lib/DataTables/datatables.custom.css" rel="stylesheet" />
+    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+    @RenderSection("styles", false)
+</head>
+<body>
+    <!-- Top Bar Start -->
+    <div class="topbar">
+        <!-- LOGO -->
+        <div class="topbar-left">
+            <a href="#" class="logo">
+                <span>
+                    <img src="/dashboard/authenticate/assets/images/logo-sm_1.png" alt="logo" class="auth-logo logo-sm">
+                </span>
+                <span>
+                    <img src="~/dashboard/authenticate/assets/images/logo-sm_2.png" alt="logo" class="auth-logo logo-lg">
+                </span>
+            </a>
+        </div>
+        <!--end logo-->
+        <!-- Navbar -->
+        <nav class="navbar-custom">
+            <!--#region wallet and user settings-->
+            <partial name="_UserSettingsPartial" />
+            <!--#endregion-->
+            <ul class="list-unstyled topbar-nav mb-0">
+                <li>
+                    <button class="button-menu-mobile nav-link waves-effect waves-light">
+                        <i class="dripicons-menu nav-icon"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+        <!-- end navbar-->
+    </div>
+    <!-- Top Bar End -->
+
+    <div class="page-wrapper">
+        <!-- Left Side nav -->
+        <partial name="_LeftSideNavPartial" />
+        <!-- end left-side nav-->
+        <!-- Page Content-->
+        <div class="page-content">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card mt-2 mb-2">
+                            <div class="card-body">
+                                @RenderBody()
+                            </div> <!-- card-body-->
+                        </div><!--end card-->
+                    </div> <!-- end col -->
+                </div>
+            </div><!-- container -->
+
+            <footer class="footer text-center text-sm-left">
+                &copy; 2020
+            </footer><!--end footer-->
+        </div>
+        <!-- end page content -->
+    </div>
+    <!-- end page-wrapper -->
+    <!-- jQuery  -->
+    <script src="~/dashboard/template/assets/js/jquery.min.js"></script>
+    <script src="~/dashboard/template/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/dashboard/template/assets/js/metisMenu.min.js"></script>
+    <script src="~/dashboard/template/assets/js/waves.min.js"></script>
+    <script src="~/dashboard/template/assets/js/jquery.slimscroll.min.js"></script>
+    <script src="~/lib/sweetalert/sweetalert.min.js"></script>
+    <script src="~/lib/DataTables/datatables.min.js"></script>
+    <script src="~/lib/select2/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <!-- App js -->
+    <script src="~/js/CostumerScript.js"></script>
+    <script src="~/dashboard/template/assets/js/app.js"></script>
+    @RenderSection("scripts", false)
+
+</body>
+</html>

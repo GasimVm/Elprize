@@ -1,0 +1,74 @@
+﻿@using System.Security.Claims
+@{
+    string username = User.FindFirst(ClaimTypes.Name).Value;
+    int userCash = Convert.ToInt32(User.FindFirst(ClaimTypes.HomePhone).Value);
+    
+}
+
+        <ul class="list-unstyled topbar-nav float-right mb-0">
+            <li class="hidden-sm">
+                <div class="crypto-balance">
+                    <i style="color: #d7b118" class="dripicons-wallet align-self-center"></i>
+                    <div class="btc-balance">
+                        <h5 style="color: #d7b118" class="m-0">@ViewBag.cash<span>eP</span></h5>
+                        <span style="color: #d7b118" class="text-muted">Total Balance</span>
+                    </div>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
+                   aria-haspopup="false" aria-expanded="false">
+                    <img src="~/dashboard/template/assets/images/users/user-4.jpg" alt="profile-user" class="rounded-circle" />
+                    <span class="ml-1 nav-user-name hidden-sm">@username<i class="mdi mdi-chevron-down"></i> </span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="@Url.Action("AuthLockScreen","Account")"><i class="dripicons-user text-muted mr-2"></i> Profile</a>
+                    <a class="dropdown-item" href="@Url.Action("AuthLockScreen","Account")"><i class="dripicons-wallet text-muted mr-2"></i> My Wallet</a>
+                    <a class="dropdown-item" href="@Url.Action("AuthLockScreen","Account")"><i class="dripicons-gear text-muted mr-2"></i> Settings</a>
+                    <a class="dropdown-item" href="@Url.Action("AuthLockScreen","Account")"><i class="dripicons-lock text-muted mr-2"></i> Lock screen</a>
+                    <div class="dropdown-divider"></div>
+                    <form asp-action="Logout" asp-controller="Account" method="post" class="dropdown-item">
+                        <button type="submit" class="dropdown-item p-0"><i class="dripicons-exit text-muted mr-2 "></i> Logout</button>
+                    </form>
+                    @* <a class="dropdown-item" href="@Url.Action("AuthLockScreen","Account")"><i class="dripicons-exit text-muted mr-2"></i> Logout</a>*@
+                </div>
+            </li>
+        </ul><!--end topbar-nav-->
+     
+ 
+
+@*@if (SignInManager.IsSignedIn(User))
+    {
+
+        <div class="buttons">
+
+            @if (!User.IsInRole(StaticRoles.Admin) ||
+               !User.IsInRole(StaticRoles.Moderator))
+            {
+                @if (User.IsInRole(StaticRoles.Driver))
+                {
+                    <button onclick="window.location.href = '/driver/profile';" class="light-btn">Profile</button>
+                }
+                else if (User.IsInRole(StaticRoles.Tourist))
+                {
+                    <button onclick="window.location.href = '/tourist/profile';" class="light-btn">Profile</button>
+
+                }
+                else if (User.IsInRole(StaticRoles.Guide))
+                {
+                    <button onclick="window.location.href = '/guide/profile';" class="light-btn">Profile</button>
+
+                }
+            }
+            <form asp-action="Logout" asp-controller="Account" method="post" class="">
+                <button type="submit" class="dark-btn">Logout</button>
+            </form>
+        </div>
+    }
+    else
+    {
+        <div class="buttons">
+            <button onclick="window.location.href = '/account/login';" class="light-btn">Login</button>
+            <button onclick="window.location.href = '/register';" class="dark-btn">Register</button>
+        </div>
+    }*@

@@ -1,0 +1,109 @@
+﻿@model IEnumerable<Prize.Models.UserTranViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Online User</h1>
+
+<table id="table" class="table table-hover table-bordered ">
+    <thead>
+        <tr>
+            <th>Firstame<br /><input type="text" placeholder="Source" class="form-control" /></th>
+            <th>Lastname<br /><input type="text" placeholder="Source" class="form-control" /></th>
+            <th>Username<br /><input type="text" placeholder="Source" class="form-control" /></th>
+            <th>Cash<br /><input type="text" placeholder="Source" class="form-control" /></th>
+            <th>Transaction count<br /><input type="text" placeholder="Source" class="form-control" /></th>
+            <th>Transaction discount<br /><input type="text" placeholder="Source" class="form-control" /></th>
+            <th>Acvited<br /><input type="text" placeholder="Source" class="form-control" /></th>
+            <th>Block<br /><input type="text" placeholder="Source" class="form-control" /></th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (Model != null)
+        {
+
+            @foreach (var item in Model)
+            {
+                string url = "/User/Profile?userId=" + item.Users.Id;
+                <tr data-href="@url">
+                    <td>@item.Users.Firstame</td>
+                    <td>@item.Users.Lastname</td>
+                    <td>@item.Users.Username</td>
+                    <td>@item.Users.Cash</td>
+                    <td>@item.tranCount</td>
+                    <td>@item.tranDis</td>
+                    @if (item.Users.Acvited)
+                    {
+                        <td>Acvited</td>
+                    }
+                    else
+                    {
+                        <td>Block</td>
+                    }
+
+                    <td><button class="btn btn-danger btnBlock" data-id="@item.Users.Id">Block</button></td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+
+@section Scripts{
+
+    <script type="text/javascript">
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+        var table = $('#table').DataTable({
+
+            "order": [[0, "desc"]]
+        });
+        table.columns().every(function () {
+            var that = this;
+            $('input', this.header()).on('keyup change', function () {
+                if (that.search() !== this.value) {
+                    that
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
+        $('.btnBlock').click(function () {
+            var userId = $(this).attr('data-id');
+            $.ajax({
+                type: "Post",
+                url: "/User/Block",
+                data: { id: userId },
+                success: function (response) {
+                    if (response.status === "success") {
+                        Toast.fire({
+                            type: response.status,
+                            title: response.message
+                        })
+                        setInterval(function () {
+                            window.location.href = response.url;
+                        }, 1000);
+                    }
+                    else {
+                        Toast.fire({
+                            type: 'error',
+                            title: response.message
+                        })
+                    }
+                }
+
+            });
+        })
+
+
+
+    </script>
+}

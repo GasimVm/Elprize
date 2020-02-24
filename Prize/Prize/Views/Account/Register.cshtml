@@ -1,0 +1,202 @@
+﻿@model RegisterViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/dashboard/authenticate/assets/images/logo-sm_1.png">
+    <!-- App css -->
+    <link href="~/dashboard/authenticate/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/dashboard/authenticate/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="~/dashboard/authenticate/assets/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/dashboard/authenticate/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+</head>
+
+<body class="account-body accountbg">
+    <!-- Log In page -->
+    <div class="row vh-100 ">
+        <div class="col-12 align-self-center">
+            <div class="auth-page">
+                <div class="card auth-card shadow-lg">
+                    <div class="card-body">
+                        <div class="px-3">
+                            <div class="auth-logo-box">
+                                <a href="#" class="logo logo-admin"><img src="~/dashboard/authenticate/assets/images/logo-sm.png" height="55" alt="logo" class="auth-logo"></a>
+                            </div><!--end auth-logo-box-->
+
+                            <div class="text-center auth-logo-text">
+                                <h4 class="mt-0 mb-3 mt-5">Free Register for elPrize</h4>
+                                <p class="text-muted mb-0">Get your free elPrize account now.</p>
+                            </div> <!--end auth-logo-text-->
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs justify-content-center mt-2" role="tablist">
+                                <li class="nav-item mr-2">
+                                    <a class="nav-link active" data-toggle="tab" href="#personalInfo" role="tab">Personal Info</a>
+                                </li>
+                                <li class="nav-item ml-2">
+                                    <a class="nav-link" data-toggle="tab" href="#account" role="tab">Account</a>
+                                </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <form id="registerForm" class="form-horizontal auth-form my-4" action="#" autocomplete="off">
+                                <div class="tab-content">
+                                    <div class="tab-pane active p-3" id="personalInfo" role="tabpanel">
+
+                                        <div class="form-group">
+                                            <label asp-for="Firstname"></label>
+                                            <div class="input-group mb-3">
+                                                <span class="auth-form-icon">
+                                                    <i class="dripicons-user"></i>
+                                                </span>
+                                                <input required="required" type="text" class="form-control" asp-for="Firstname" placeholder="Enter Firstname" autocomplete="off">
+                                            </div>
+                                            <span asp-validation-for="Firstname" class="text-danger"></span>
+                                        </div><!--firstName end form-group-->
+
+                                        <div class="form-group">
+                                            <label asp-for="Lastname"></label>
+                                            <div class="input-group mb-3">
+                                                <span class="auth-form-icon">
+                                                    <i class="dripicons-user"></i>
+                                                </span>
+                                                <input required="required" type="text" class="form-control" asp-for="Lastname" placeholder="Enter Lastname" autocomplete="off">
+                                            </div>
+                                            <span asp-validation-for="Lastname" class="text-danger"></span>
+                                        </div><!--lastName end form-group-->
+
+                                        <div class="form-group">
+                                            <label asp-for="PhoneNumber">Mobile Number</label>
+                                            <div class="input-group mb-3">
+                                                <span class="auth-form-icon">
+                                                    <i class="dripicons-phone"></i>
+                                                </span>
+                                                <input type="tel" class="form-control" asp-for="PhoneNumber" required="required" placeholder="Enter Mobile Number" autocomplete="off">
+                                            </div>
+                                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                        </div><!--number end form-group-->
+
+                                        <div class="form-group">
+                                            <label asp-for="CountryId"></label>
+                                            <div class="input-group mb-3">
+                                                <select required="required" class="form-control select2DropDown" asp-for="CountryId"
+                                                        asp-items="ViewBag.Countries">
+                                                    <option value="">Choose country</option>
+                                                </select>
+                                            </div>
+                                            <span asp-validation-for="CountryId" class="text-danger"></span>
+                                        </div><!--country end form-group-->
+                                    </div>
+                                    <div class="tab-pane p-3" id="account" role="tabpanel">
+
+                                        <div class="form-group">
+                                            <label asp-for="Username">Username</label>
+                                            <div class="input-group mb-3">
+                                                <span class="auth-form-icon">
+                                                    <i class="dripicons-user"></i>
+                                                </span>
+                                                <input type="text" class="form-control" asp-for="Username" required="required" placeholder="Enter username" autocomplete="off">
+
+                                            </div>
+                                            <span asp-validation-for="Username" class="text-danger"></span>
+                                        </div><!--end form-group-->
+
+                                        <div class="form-group">
+                                            <label asp-for="Email">Email</label>
+                                            <div class="input-group mb-3">
+                                                <span class="auth-form-icon">
+                                                    <i class="dripicons-mail"></i>
+                                                </span>
+                                                <input type="email" class="form-control" asp-for="Email" required="required" placeholder="Enter Email" autocomplete="off">
+
+                                            </div>
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div><!--end form-group-->
+
+                                        <div class="form-group">
+                                            <label asp-for="Password">Password</label>
+                                            <div class="input-group mb-3">
+                                                <span class="auth-form-icon">
+                                                    <i class="dripicons-lock"></i>
+                                                </span>
+                                                <input onkeyup="check();" type="password" class="form-control" asp-for="Password" required="required" placeholder="Enter password" autocomplete="off">
+
+                                            </div>
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                        </div><!--end form-group-->
+
+                                        <div class="form-group">
+                                            <label asp-for="ConfirmPassword">Confirm Password</label>
+                                            <div class="input-group mb-3">
+                                                <span class="auth-form-icon">
+                                                    <i class="dripicons-lock-open"></i>
+                                                </span>
+                                                <input onkeyup="check();" type="password" class="form-control" asp-for="ConfirmPassword" required="required" placeholder="Enter Confirm Password" autocomplete="off">
+                                            </div>
+                                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                            <span style="font-size:12px" id='errorMessage'></span>
+                                        </div><!--end form-group-->
+                                        <div class="form-group">
+                                            <label asp-for="PromoCode">PromoCode</label>
+                                            <div class="input-group mb-3">
+                                                <span class="auth-form-icon">
+                                                    <i class="dripicons-lock"></i>
+                                                </span>
+                                                <input   type="text" class="form-control" asp-for="PromoCode"   placeholder="Enter PromoCode" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Nav tabs -->
+                                </div>
+                                <div class="form-group row mt-4">
+                                    <div class="col-sm-12">
+                                        <div class="custom-control custom-switch switch-success">
+                                            <input type="checkbox" class="custom-control-input" id="customSwitchSuccess">
+                                            <label class="custom-control-label text-muted" for="customSwitchSuccess">By registering you agree to the Frogetor <a href="#" class="text-primary">Terms of Use</a></label>
+                                        </div>
+                                    </div><!--end col-->
+                                </div><!--end form-group-->
+
+                                <div class="form-group mb-0 row">
+                                    <div class="col-12 mt-2">
+                                        <button class="btn btn-elPrize btn-round btn-block waves-effect waves-light"
+                                                type="button" onclick="onClickRegister();">
+                                            Register <i class="fas fa-sign-in-alt ml-1"></i>
+                                        </button>
+                                    </div><!--end col-->
+                                </div> <!--end form-group-->
+                            </form>
+                        </div><!--end /div-->
+
+                        <div class="m-3 text-center text-muted">
+                            <p class="">Already have an account ? <a href="@Url.Action("Login","Account")" class="text-primary ml-2">Log in</a></p>
+                        </div>
+                    </div><!--end card-body-->
+                </div><!--end card-->
+            </div><!--end auth-card-->
+        </div><!--end col-->
+    </div><!--end row-->
+    <!-- End Log In page -->
+    <!-- jQuery  -->
+    <script src="~/dashboard/authenticate/assets/js/jquery.min.js"></script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/dashboard/authenticate/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/dashboard/authenticate/assets/js/metisMenu.min.js"></script>
+    <script src="~/dashboard/authenticate/assets/js/waves.min.js"></script>
+    <script src="~/dashboard/authenticate/assets/js/jquery.slimscroll.min.js"></script>
+    <!-- App js -->
+    <script src="~/dashboard/authenticate/assets/js/app.js"></script>
+    <!--custom-->
+    <script src="~/lib/select2/js/select2.min.js"></script>
+    <script src="~/lib/select2/js/select2.init.js"></script>
+    <script src="~/lib/sweetalert/sweetalert.min.js"></script>
+    <script src="~/dashboard/custom/account/checkPassword.js" asp-append-version="true"></script>
+    <script src="~/dashboard/custom/account/register.js" asp-append-version="true"></script>
+
+</body>
+</html>

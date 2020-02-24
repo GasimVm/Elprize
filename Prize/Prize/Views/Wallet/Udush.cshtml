@@ -1,0 +1,128 @@
+﻿
+@{
+    ViewData["Title"] = "Prize";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ 
+<h1>Prize</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <button type="button" id="pirt" class="btn btn-primary btn-lg btn-block">Şansını yoxla</button>
+        </div>
+    </div>
+</div>
+
+<video id="homevideo_1" style="display:none; margin:20px auto;" width="400" height="300" autoplay>
+    <source id="cindir" src="~/dashboard/template/assets/images/roger0185.mp4" type='video/mp4' />
+</video>
+
+<video id="homevideo_2" style="display:none; margin:20px auto; " width="400" height="300">
+    <source id="cindir" src="~/dashboard/template/assets/images/rolex0187.mp4" type='video/mp4' />
+</video>
+<video id="homevideo_3" style="display:none; margin:20px auto;" width="400" height="300">
+    <source id="cindir" src="~/dashboard/template/assets/images/empori.mp4" type='video/mp4' />
+</video>
+<video id="homevideo_4" style="display:none; margin:20px auto;" width="400" height="300">
+    <source id="cindir" src="~/dashboard/template/assets/images/salam1.mp4" type='video/mp4' />
+</video>
+ 
+
+<br />
+<script>
+
+
+
+    let vid1 = document.getElementById("homevideo_1");
+    let vid2 = document.getElementById("homevideo_2");
+    let vid3 = document.getElementById("homevideo_3");
+    let vid4 = document.getElementById("homevideo_4");
+    
+
+    let cindir = document.getElementById("cindir");
+
+    vid1.onended = function Vidoe1() {
+        vid1.style.display = "none";
+        vid2.style.display = "block";
+        vid2.play();
+    };
+    vid2.onended = function Vidoe2() {
+
+        vid2.style.display = "none";
+        vid3.style.display = "block";
+        vid3.play();
+
+
+    };
+
+    vid3.onended = function Vidoe3() {
+        vid3.style.display = "none";
+        vid4.style.display = "block";
+        vid4.play();
+        udushYoxla();
+    };
+    vid4.onended = function Vidoe4() {
+        vid4.style.display = "none";
+
+        
+
+    };
+
+   
+
+    function udushYoxla() {
+        let random_shans = [];
+        let dudush_shansi = 30;
+        let udushButton = document.getElementById('pirt');
+
+        for (let i = 0; i < dudush_shansi / 10; i++) {
+            random_shans.push(true);
+        }
+
+        for (let i = 0; i < 10 - (dudush_shansi / 10); i++) {
+            random_shans.push(false);
+        }
+
+        function getRandom() {
+            let randomNumber = Math.floor(Math.random() * 10);
+            console.log(randomNumber);
+            return randomNumber;
+        }
+
+        /*udushButton.addEventListener("click", */function Tekrarla() {
+            let udushNomresi = getRandom();
+            let udush = random_shans[udushNomresi];
+
+
+            setTimeout(function () {
+
+                if (udush) {
+
+                    swal({
+                        title: "Təbriklər",
+                        text: "Siz qazandınız!",
+                        icon: "success",
+                        button: "Ok",
+                    });
+                }
+                else {
+                    Tekrarla()
+                }
+                console.log(udush);
+            }, 3000);
+        };
+
+        Tekrarla();
+
+
+        /*)*/;
+    };
+
+
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
+
+

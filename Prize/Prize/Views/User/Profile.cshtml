@@ -1,0 +1,91 @@
+﻿@model Prize.Models.User
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .imags {
+        width: 200px;
+        height: 200px;
+        box-sizing: border-box;
+    }
+
+    p {
+        font-size: 15px;
+    }
+
+    .pad {
+        padding: 10px 0;
+        box-sizing: border-box;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-xs-12 ">
+            <img style="width: 100%;" src="~/dashboard/authenticate/assets/images/no-image.png" />
+        </div>
+        <div class="col-md-8 col-xs-12 pad">
+            <p>@Model.Firstame:</p>
+            <p>@Model.Lastname:</p>
+            <p>@Model.Username:</p>
+            <p>@Model.Email:</p>
+            <p>@Model.Cash:</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<h1 style="text-align:center">  User action</h1>
+
+<table id="table" class="table table-hover table-bordered ">
+    <thead>
+        <tr>
+            <th>Username<br /><input type="text" placeholder="Source" class="form-control" /></th>
+            <th>Action name<br /><input type="text" placeholder="Source" class="form-control" /></th>
+            <th>Date<br /><input type="text" placeholder="Source" class="form-control" /></th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (Model != null)
+        {
+
+            @foreach (var item in ViewBag.Log)
+            {
+
+                <tr>
+                    <td>@Model.Username</td>
+                    <td>@item.ActionName</td>
+                    <td>@item.StartDate</td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        var table = $('#table').DataTable({
+
+            "order": [[0, "desc"]]
+        });
+        table.columns().every(function () {
+            var that = this;
+            $('input', this.header()).on('keyup change', function () {
+                if (that.search() !== this.value) {
+                    that
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
+
+    </script>
+}
